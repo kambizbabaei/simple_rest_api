@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Kamba\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Kamba\\.nuget\\packages"
+    ]
+  }
+}
