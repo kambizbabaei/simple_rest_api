@@ -57,9 +57,28 @@ namespace webapitest.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public Task<string> LoginAsync(string requestEmail, string requestPassword)
+        public async Task<string> LoginAsync(string requestEmail, string requestPassword)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(requestEmail);
+            if (user is null)
+            {
+                return String.Empty;
+            }
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(new []
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub,user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email,user.Email),
+                    new Claim(JwtRegisteredClaimNames.NameId,user.Id.ToString())
+                }),
+                SigningCredentials =new SigningCredentials (new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }
