@@ -65,21 +65,28 @@ namespace webapitest.Services
             {
                 return String.Empty;
             }
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor()
+
+            if (await _userManager.CheckPasswordAsync(user, requestPassword))
             {
-                Subject = new ClaimsIdentity(new []
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+                var tokenDescriptor = new SecurityTokenDescriptor()
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub,user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email,user.Email),
-                    new Claim("Id",user.Id.ToString())
-                }),
-                SigningCredentials =new SigningCredentials (new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                        new Claim("Id", user.Id.ToString())
+                    }),
+                    SigningCredentials =
+                        new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                return tokenHandler.WriteToken(token);
+            }
+
+            return string.Empty;
         }
     }
 }
