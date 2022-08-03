@@ -59,6 +59,7 @@ namespace webapitest.Services
 
         public async Task<string> LoginAsync(string requestEmail, string requestPassword)
         {
+            // TODO: add password check thro hash
             var user = await _userManager.FindByEmailAsync(requestEmail);
             if (user is null)
             {

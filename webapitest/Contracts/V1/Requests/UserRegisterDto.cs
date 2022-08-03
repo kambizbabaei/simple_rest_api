@@ -2,7 +2,7 @@
 
 namespace webapitest.Contracts.V1.Requests
 {
-    public struct UserRegisterDto
+    public class UserRegisterDto
     {
         [EmailAddress]
         public string Email { get; set; }

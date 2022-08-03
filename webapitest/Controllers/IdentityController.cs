@@ -26,7 +26,7 @@ namespace webapitest.Controllers
             return new OkObjectResult(new {Token = authResponse});
         }  
         [HttpGet("Login")]
-        public async Task<object> Login([FromBody] UserRegisterDto request)
+        public async Task<object> Login([FromQuery] UserRegisterDto request)
         {
             var authResponse = await _identityService.LoginAsync(request.Email, request.Password);
             if (authResponse == String.Empty)
