@@ -48,3 +48,5 @@ D:\Projects\tst\test api\webapitest\bin\Debug\net5.0\Microsoft.AspNetCore.Crypto
 D:\Projects\tst\test api\webapitest\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\Projects\tst\test api\webapitest\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 D:\Projects\tst\test api\webapitest\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Projects\tst\test api\webapitest\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
+D:\Projects\tst\test api\webapitest\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll

@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using webapitest.Domains;
 using webapitest.other;
@@ -51,7 +50,7 @@ namespace webapitest.Services
                     new Claim(JwtRegisteredClaimNames.Sub,user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email,user.Email),
-                    new Claim(JwtRegisteredClaimNames.NameId,user.Id.ToString())
+                    new Claim("Id",user.Id.ToString())
                 }),
                 SigningCredentials =new SigningCredentials (new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256)
             };
@@ -75,7 +74,7 @@ namespace webapitest.Services
                     new Claim(JwtRegisteredClaimNames.Sub,user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email,user.Email),
-                    new Claim(JwtRegisteredClaimNames.NameId,user.Id.ToString())
+                    new Claim("Id",user.Id.ToString())
                 }),
                 SigningCredentials =new SigningCredentials (new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256)
             };

@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
 using webapitest.DataContext;
 using webapitest.Domains;
 
@@ -24,7 +26,8 @@ namespace webapitest.Controllers
         [HttpGet]
         public object TestAdminController()
         {
-            return new OkObjectResult(new { Result = "This is Admin Controller Working !!" });
+            return new OkObjectResult(new { Result = "This is Admin Controller Working !!"
+                ,User = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id")?.Value});
         }
         
         [HttpPost("addItemToShop")]

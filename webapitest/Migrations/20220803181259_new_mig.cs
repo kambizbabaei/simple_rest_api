@@ -4,10 +4,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace webapitest.Migrations
 {
-    public partial class add_user : Migration
+    public partial class new_mig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.RenameColumn(
+                name: "price",
+                table: "Items",
+                newName: "Price");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -215,6 +220,11 @@ namespace webapitest.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.RenameColumn(
+                name: "Price",
+                table: "Items",
+                newName: "price");
         }
     }
 }
