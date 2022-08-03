@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using webapitest.Domains;
 
 namespace webapitest.DataContext
 {
-    public class Context:DbContext
+    public class Context:IdentityDbContext<User, Role, int>
     {
         public Context(DbContextOptions<Context> options) : base(options) { }
 
