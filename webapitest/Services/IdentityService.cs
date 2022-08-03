@@ -4,9 +4,11 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using webapitest.Domains;
 using webapitest.other;
+using JwtRegisteredClaimNames = System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames;
 
 namespace webapitest.Services
 {
@@ -59,7 +61,6 @@ namespace webapitest.Services
 
         public async Task<string> LoginAsync(string requestEmail, string requestPassword)
         {
-            // TODO: add password check thro hash
             var user = await _userManager.FindByEmailAsync(requestEmail);
             if (user is null)
             {
